@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/forgot_password_text.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
 import 'package:hidden_gems/ui/wigets/login_header.dart';
 import 'package:hidden_gems/ui/wigets/logo_widget.dart';
 import 'package:hidden_gems/ui/wigets/password_text_field.dart';
+import 'package:hidden_gems/ui/wigets/responsive_center_scrollable.dart';
 import 'package:hidden_gems/ui/wigets/sign_in_divider.dart';
 import 'package:hidden_gems/ui/wigets/sign_up_text.dart';
 import 'package:hidden_gems/ui/wigets/social_login_buttons.dart';
@@ -31,19 +33,21 @@ class LoginScreenState extends State<LoginScreen> {
       ],
       child: Scaffold(
         backgroundColor: authBackgroundColor,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+        body: ResponsiveCenterScrollable(
+          maxContentWidth: 400,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const LogoWidget(),
                 const SizedBox(height: 32),
                 const LoginHeader(),
                 const SizedBox(height: 32),
-                EmailTextField(_usernameController),
+                Flexible(child: EmailTextField(_usernameController)),
                 const SizedBox(height: 16),
-                PasswordTextField(_passwordController),
+                Flexible(child: PasswordTextField(_passwordController)),
                 const SizedBox(height: 24),
                 const LoginButton(),
                 const SizedBox(height: 16),
