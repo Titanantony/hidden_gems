@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/forgot_password_text.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
@@ -56,12 +58,18 @@ class LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 const SocialMediaButtons(),
                 const SizedBox(height: 16),
-                const SignUpInText(),
+                SignUpInText(
+                  onTap: signUp,
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void signUp() {
+    Get.offAndToNamed("/Sign-Up");
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_gems/ui/screens/sign_in_screen.dart';
+import 'package:get/get.dart';
+import 'package:hidden_gems/routes.dart'; // Import your routes file
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Screen',
       theme: ThemeData(
         fontFamily: 'Calibri', // Sans-serif font
       ),
-      home: const LoginScreen(),
+      initialRoute: '/Sign-In', // Set the initial route
+      getPages: Routes.routes, // Pass the routes from your routes file
     );
   }
 }

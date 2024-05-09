@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
 import 'package:hidden_gems/ui/wigets/sign_in_up_divider.dart';
@@ -62,12 +63,12 @@ class SignUpScreenState extends State<SignUpScreen> {
                   text: "Sign up with",
                 ),
                 const SizedBox(height: 16),
-                const LoginButton(buttonText: 'Sign Up'),
                 const SocialMediaButtons(),
                 const SizedBox(height: 32),
-                const SignUpInText(
-                  preText: "Have an acount",
+                SignUpInText(
+                  preText: "Have an acount? ",
                   linkText: 'Sign In',
+                  onTap: signIn,
                 ),
               ],
             ),
@@ -75,5 +76,9 @@ class SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void signIn() {
+    Get.offAndToNamed("/Sign-In");
   }
 }
