@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/forgot_password_text.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
-import 'package:hidden_gems/ui/wigets/login_header.dart';
+import 'package:hidden_gems/ui/wigets/signin_up_header.dart';
 import 'package:hidden_gems/ui/wigets/logo_widget.dart';
 import 'package:hidden_gems/ui/wigets/password_text_field.dart';
 import 'package:hidden_gems/ui/wigets/responsive_center_scrollable.dart';
-import 'package:hidden_gems/ui/wigets/sign_in_divider.dart';
-import 'package:hidden_gems/ui/wigets/sign_up_text.dart';
-import 'package:hidden_gems/ui/wigets/social_login_buttons.dart';
+import 'package:hidden_gems/ui/wigets/sign_in_up_divider.dart';
+import 'package:hidden_gems/ui/wigets/sign_up_in_text.dart';
+import 'package:hidden_gems/ui/wigets/social_media_buttons.dart';
 import 'package:hidden_gems/ui/constants/colors.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -43,7 +42,7 @@ class LoginScreenState extends State<LoginScreen> {
               children: [
                 const LogoWidget(),
                 const SizedBox(height: 32),
-                const LoginHeader(),
+                const SignInUpHeader(),
                 const SizedBox(height: 32),
                 Flexible(child: EmailTextField(_usernameController)),
                 const SizedBox(height: 16),
@@ -53,11 +52,11 @@ class LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 const ForgotPasswordText(),
                 const SizedBox(height: 32),
-                const SignInDivider(),
+                const SignInUpDivider(),
                 const SizedBox(height: 16),
-                const SocialLoginButtons(),
+                const SocialMediaButtons(),
                 const SizedBox(height: 16),
-                const SignUpText(),
+                const SignUpInText(),
               ],
             ),
           ),

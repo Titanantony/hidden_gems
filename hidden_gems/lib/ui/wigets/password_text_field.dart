@@ -4,14 +4,16 @@ import 'package:hidden_gems/ui/constants/colors.dart';
 
 class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
+  final String labelText;
 
-  const PasswordTextField(this.controller, {super.key});
+  const PasswordTextField(this.controller,
+      {super.key, this.labelText = 'Email or phone number'});
 
   @override
   Widget build(BuildContext context) {
     return AuthCustomTextField(
       controller: controller,
-      hintText: 'Password',
+      hintText: labelText,
       obscureText: true,
       prefixIcon: const Icon(Icons.lock, color: authTextColor),
       isPassword: true,

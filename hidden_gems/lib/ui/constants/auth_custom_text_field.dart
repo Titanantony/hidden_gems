@@ -6,6 +6,7 @@ class AuthCustomTextField extends StatefulWidget {
   final bool obscureText;
   final Icon prefixIcon;
   final bool isPassword;
+  // final String labelText;
 
   const AuthCustomTextField({
     super.key,
@@ -14,6 +15,8 @@ class AuthCustomTextField extends StatefulWidget {
     this.obscureText = false,
     required this.prefixIcon,
     this.isPassword = false,
+    // required this.labelText,
+    // this.labelText = '',
   });
 
   @override
@@ -36,6 +39,7 @@ class AuthCustomTextFieldState extends State<AuthCustomTextField> {
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
+        // labelText: widget.labelText,
         hintStyle: const TextStyle(color: Color(0xff9f6a4a)),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword

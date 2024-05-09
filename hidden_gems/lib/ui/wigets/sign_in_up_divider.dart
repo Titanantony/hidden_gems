@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SignInDivider extends StatelessWidget {
-  const SignInDivider({super.key});
+class SignInUpDivider extends StatelessWidget {
+  final String text;
+
+  const SignInUpDivider({super.key, this.text = "Sign in with"});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SignInDivider extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            'Sign in with',
+            text,
             style: TextStyle(
               color: Colors.grey[700],
               fontWeight: FontWeight.bold,

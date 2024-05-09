@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_gems/ui/constants/colors.dart';
 
-class LoginHeader extends StatelessWidget {
-  const LoginHeader({super.key});
+class SignInUpHeader extends StatelessWidget {
+  final String text;
+  const SignInUpHeader({super.key, this.text = "Login"});
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Login',
-      style: TextStyle(
+    return Text(
+      text,
+      style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: authTextColor,
