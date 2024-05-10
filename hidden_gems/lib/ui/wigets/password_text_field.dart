@@ -7,7 +7,7 @@ class PasswordTextField extends StatelessWidget {
   final String labelText;
 
   const PasswordTextField(this.controller,
-      {super.key, this.labelText = 'Email or phone number'});
+      {super.key, this.labelText = 'Password'});
 
   @override
   Widget build(BuildContext context) {

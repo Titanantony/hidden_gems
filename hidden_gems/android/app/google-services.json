@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "254765599757",
+    "project_id": "flutterauth-b57e1",
+    "storage_bucket": "flutterauth-b57e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254765599757:android:1f71e4ba4b732eab6c9944",
+        "android_client_info": {
+          "package_name": "com.example.hidden_gems"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_PO9b_gdb23xmGItkOD7twSVcm-2Av4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

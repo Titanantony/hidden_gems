@@ -38,6 +38,8 @@ dependencies:
   sign_in_button: ^3.2.0
   keyboard_dismisser: ^3.0.0
   get: ^4.6.6
+  firebase_core: ^2.31.0
+  firebase_auth: ^4.19.5
 
 dev_dependencies:
   flutter_test:

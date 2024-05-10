@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -22,7 +23,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
@@ -46,11 +47,11 @@ class LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 32),
                 const SignInUpHeader(),
                 const SizedBox(height: 32),
-                Flexible(child: EmailTextField(_usernameController)),
+                Flexible(child: EmailTextField(_emailController)),
                 const SizedBox(height: 16),
                 Flexible(child: PasswordTextField(_passwordController)),
                 const SizedBox(height: 24),
-                const LoginButton(),
+                LoginButton(onPressed: login),
                 const SizedBox(height: 16),
                 const ForgotPasswordText(),
                 const SizedBox(height: 32),
@@ -67,6 +68,28 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      print('Email and password cannot be empty.');
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Get.offAllNamed('/Home-Page'); // Navigate to the HomePage
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 
   void signUp() {

@@ -4,8 +4,10 @@ import 'package:hidden_gems/ui/constants/colors.dart';
 
 class LoginButton extends StatelessWidget {
   final String buttonText; // Add a text parameter for customization
+  final VoidCallback onPressed;
 
-  const LoginButton({super.key, this.buttonText = 'Login'});
+  const LoginButton(
+      {super.key, this.buttonText = 'Login', required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,7 @@ class LoginButton extends StatelessWidget {
       color: authButtonColor,
       width: 200,
       height: 50,
-      onPressed: () {
-        // Implement login logic here
-      },
+      onPressed: onPressed,
     );
   }
 }

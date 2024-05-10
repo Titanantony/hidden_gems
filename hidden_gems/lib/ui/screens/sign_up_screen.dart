@@ -55,8 +55,9 @@ class SignUpScreenState extends State<SignUpScreen> {
                     child: PasswordTextField(_confirmPasswordController,
                         labelText: 'Confirm Password')),
                 const SizedBox(height: 24),
-                const LoginButton(
+                LoginButton(
                   buttonText: "Sign up",
+                  onPressed: () => {print("pressed")},
                 ),
                 const SizedBox(height: 24),
                 const SignInUpDivider(
@@ -70,6 +71,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                   linkText: 'Sign In',
                   onTap: signIn,
                 ),
+                const SizedBox(height: 16),
               ],
             ),
           ),
