@@ -5,9 +5,16 @@ import 'package:hidden_gems/ui/constants/colors.dart';
 class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
+  final FormFieldValidator<String>? validator;
+  final Function(String?)? onSaved;
 
-  const PasswordTextField(this.controller,
-      {super.key, this.labelText = 'Password'});
+  const PasswordTextField(
+    this.controller, {
+    super.key,
+    this.labelText = 'Password',
+    this.validator,
+    this.onSaved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,8 @@ class PasswordTextField extends StatelessWidget {
       obscureText: true,
       prefixIcon: const Icon(Icons.lock, color: authTextColor),
       isPassword: true,
+      validator: validator,
+      onSaved: onSaved,
     );
   }
 }

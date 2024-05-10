@@ -23,8 +23,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +54,33 @@ class LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 32),
                 const SignInUpHeader(),
                 const SizedBox(height: 32),
-                Flexible(child: EmailTextField(_emailController)),
+                Flexible(
+                    child: EmailTextField(
+                  _emailController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _emailController.text = value!;
+                  },
+                )),
                 const SizedBox(height: 16),
-                Flexible(child: PasswordTextField(_passwordController)),
+                Flexible(
+                    child: PasswordTextField(
+                  _passwordController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _passwordController.text = value!;
+                  },
+                )),
                 const SizedBox(height: 24),
                 LoginButton(onPressed: login),
                 const SizedBox(height: 16),
@@ -70,14 +101,16 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   Future<void> login() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
-
-    if (email.isEmpty || password.isEmpty) {
-      print('Email and password cannot be empty.');
-      return;
-    }
 
     try {
       await FirebaseAuth.instance

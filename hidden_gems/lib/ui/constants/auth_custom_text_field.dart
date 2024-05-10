@@ -6,18 +6,18 @@ class AuthCustomTextField extends StatefulWidget {
   final bool obscureText;
   final Icon prefixIcon;
   final bool isPassword;
-  // final String labelText;
+  final FormFieldValidator<String>? validator;
+  final Function(String?)? onSaved;
 
-  const AuthCustomTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    this.obscureText = false,
-    required this.prefixIcon,
-    this.isPassword = false,
-    // required this.labelText,
-    // this.labelText = '',
-  });
+  const AuthCustomTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      this.obscureText = false,
+      required this.prefixIcon,
+      this.isPassword = false,
+      this.validator,
+      this.onSaved});
 
   @override
   AuthCustomTextFieldState createState() => AuthCustomTextFieldState();
@@ -34,12 +34,11 @@ class AuthCustomTextFieldState extends State<AuthCustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       obscureText: widget.isPassword ? _obscureText : widget.obscureText,
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        // labelText: widget.labelText,
         hintStyle: const TextStyle(color: Color(0xff9f6a4a)),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
@@ -61,6 +60,8 @@ class AuthCustomTextFieldState extends State<AuthCustomTextField> {
           borderSide: BorderSide.none,
         ),
       ),
+      validator: widget.validator,
+      onSaved: widget.onSaved,
     );
   }
 }
