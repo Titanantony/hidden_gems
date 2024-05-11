@@ -7,11 +7,13 @@ class EmailTextField extends StatelessWidget {
   final String labelText;
   final FormFieldValidator<String>? validator;
   final Function(String?)? onSaved;
+  final Icon prefixIcon;
 
   const EmailTextField(
     this.controller, {
     super.key,
     this.labelText = 'Email or phone number',
+    this.prefixIcon = const Icon(Icons.email, color: authTextColor),
     this.validator,
     this.onSaved,
   });
@@ -21,7 +23,7 @@ class EmailTextField extends StatelessWidget {
     return AuthCustomTextField(
       controller: controller,
       hintText: labelText,
-      prefixIcon: const Icon(Icons.email, color: authTextColor),
+      prefixIcon: prefixIcon,
       validator: validator,
       onSaved: onSaved,
     );

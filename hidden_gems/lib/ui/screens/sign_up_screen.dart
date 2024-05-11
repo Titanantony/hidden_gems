@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hidden_gems/ui/utils/sigup_funtion.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
 import 'package:hidden_gems/ui/wigets/sign_in_up_divider.dart';
@@ -20,9 +21,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class SignUpScreenState extends State<SignUpScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _username = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  bool validatePasswords(String password, String confirmPassword) {
+    return password == confirmPassword;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +51,37 @@ class SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 32),
                 const SignInUpHeader(text: "Sign up"),
                 const SizedBox(height: 32),
-                Flexible(child: EmailTextField(_emailController)),
+                Flexible(
+                    child: EmailTextField(
+                  _username,
+                  labelText: "Enter username",
+                  prefixIcon: const Icon(Icons.person, color: authTextColor),
+                )),
+                const SizedBox(height: 16),
+                Flexible(child: EmailTextField(emailController)),
                 const SizedBox(height: 16),
                 Flexible(
-                    child: PasswordTextField(_passwordController,
+                    child: PasswordTextField(passwordController,
                         labelText: 'Password')),
                 const SizedBox(height: 16),
                 Flexible(
-                    child: PasswordTextField(_confirmPasswordController,
-                        labelText: 'Confirm Password')),
+                  child: PasswordTextField(_confirmPasswordController,
+                      labelText: 'Confirm Password'),
+                ),
                 const SizedBox(height: 24),
                 LoginButton(
                   buttonText: "Sign up",
-                  onPressed: () => {print("pressed")},
+                  onPressed: () {
+                    final password = passwordController.text;
+                    final confirmPassword = _confirmPasswordController.text;
+
+                    if (validatePasswords(password, confirmPassword)) {
+                      firebaseSignup(emailController.text, password, context);
+                    } else {
+                      // Show an error message or dialog indicating that the passwords don't match
+                      showErrorDialog(context, 'Passwords do not match');
+                    }
+                  },
                 ),
                 const SizedBox(height: 24),
                 const SignInUpDivider(

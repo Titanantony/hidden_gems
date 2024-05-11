@@ -25,7 +25,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -46,54 +46,57 @@ class LoginScreenState extends State<LoginScreen> {
           maxContentWidth: 400,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const LogoWidget(),
-                const SizedBox(height: 32),
-                const SignInUpHeader(),
-                const SizedBox(height: 32),
-                Flexible(
-                    child: EmailTextField(
-                  _emailController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _emailController.text = value!;
-                  },
-                )),
-                const SizedBox(height: 16),
-                Flexible(
-                    child: PasswordTextField(
-                  _passwordController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _passwordController.text = value!;
-                  },
-                )),
-                const SizedBox(height: 24),
-                LoginButton(onPressed: login),
-                const SizedBox(height: 16),
-                const ForgotPasswordText(),
-                const SizedBox(height: 32),
-                const SignInUpDivider(),
-                const SizedBox(height: 16),
-                const SocialMediaButtons(),
-                const SizedBox(height: 16),
-                SignUpInText(
-                  onTap: signUp,
-                ),
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const LogoWidget(),
+                  const SizedBox(height: 32),
+                  const SignInUpHeader(),
+                  const SizedBox(height: 32),
+                  Flexible(
+                      child: EmailTextField(
+                    _emailController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _emailController.text = value!;
+                    },
+                  )),
+                  const SizedBox(height: 16),
+                  Flexible(
+                      child: PasswordTextField(
+                    _passwordController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _passwordController.text = value!;
+                    },
+                  )),
+                  const SizedBox(height: 24),
+                  LoginButton(onPressed: _submit),
+                  const SizedBox(height: 16),
+                  const ForgotPasswordText(),
+                  const SizedBox(height: 32),
+                  const SignInUpDivider(),
+                  const SizedBox(height: 16),
+                  const SocialMediaButtons(),
+                  const SizedBox(height: 16),
+                  SignUpInText(
+                    onTap: signUp,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -127,5 +130,12 @@ class LoginScreenState extends State<LoginScreen> {
 
   void signUp() {
     Get.offAndToNamed("/Sign-Up");
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      login();
+    }
   }
 }
