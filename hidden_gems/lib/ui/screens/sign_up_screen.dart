@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hidden_gems/ui/utils/signup_google.dart';
 import 'package:hidden_gems/ui/utils/sigup_funtion.dart';
 import 'package:hidden_gems/ui/wigets/email_text_field.dart';
 import 'package:hidden_gems/ui/wigets/login_button.dart';
@@ -88,7 +89,12 @@ class SignUpScreenState extends State<SignUpScreen> {
                   text: "Sign up with",
                 ),
                 const SizedBox(height: 16),
-                const SocialMediaButtons(),
+                SocialMediaButtons(
+                  onGoogleSignInPressed: () {
+                    final signUpWithGoogleScreen = SignUpWithGoogleScreen();
+                    signUpWithGoogleScreen.initiateGoogleSignUp();
+                  },
+                ),
                 const SizedBox(height: 32),
                 SignUpInText(
                   preText: "Have an acount? ",

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class SocialMediaButtons extends StatelessWidget {
-  const SocialMediaButtons({super.key});
+  final Function() onGoogleSignInPressed;
+
+  const SocialMediaButtons({
+    super.key,
+    required this.onGoogleSignInPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +32,7 @@ class SocialMediaButtons extends StatelessWidget {
           child: SignInButton(
             Buttons.google,
             text: 'Google',
-            onPressed: () {
-              // Google sign-in logic
-            },
+            onPressed: onGoogleSignInPressed,
             elevation: 8.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),

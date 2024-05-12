@@ -1,26 +1,43 @@
 {
   "project_info": {
-    "project_number": "254765599757",
-    "project_id": "flutterauth-b57e1",
-    "storage_bucket": "flutterauth-b57e1.appspot.com"
+    "project_number": "954286048359",
+    "project_id": "hidden-gems-25220",
+    "storage_bucket": "hidden-gems-25220.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:254765599757:android:1f71e4ba4b732eab6c9944",
+        "mobilesdk_app_id": "1:954286048359:android:f88630607e8a8e164f80c2",
         "android_client_info": {
           "package_name": "com.example.hidden_gems"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "954286048359-pepksdkt9tcumliqs15hiqvunafrqefe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_PO9b_gdb23xmGItkOD7twSVcm-2Av4Q"
+          "current_key": "AIzaSyBKN4UpJmfmeuhEpIzBtqKDBzcs1Cjg-Rs"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954286048359-pepksdkt9tcumliqs15hiqvunafrqefe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "954286048359-m7kpfc8s13q5575hov0jbj4s2kqjaunr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hiddenGems"
+              }
+            }
+          ]
         }
       }
     }
