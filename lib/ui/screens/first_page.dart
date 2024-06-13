@@ -32,12 +32,13 @@ class FirstPage extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     _buildDescriptionText(),
                     const Spacer(flex: 3),
-                    _buildBottomContainer(screenWidth),
+                   
                   ],
                 ),
               ),
             ),
           ),
+           _buildBottomContainer(screenWidth),
         ],
       ),
     );
