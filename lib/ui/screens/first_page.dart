@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -7,6 +9,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final screenWidth = mediaQuery.size.width;
+    final screenH = mediaQuery.size.height;
 
     return Scaffold(
       body: Stack(
@@ -32,13 +35,12 @@ class FirstPage extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     _buildDescriptionText(),
                     const Spacer(flex: 3),
-                   
                   ],
                 ),
               ),
             ),
           ),
-           _buildBottomContainer(screenWidth),
+          _buildBottomContainer(screenWidth, screenH),
         ],
       ),
     );
@@ -53,9 +55,9 @@ class FirstPage extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: Colors.teal, // foreground
+          backgroundColor: Colors.transparent, // foreground
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
         child: const Text('Skip'),
@@ -84,11 +86,12 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  Align _buildBottomContainer(double screenWidth) {
+  Align _buildBottomContainer(double screenWidth, screenH) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         width: screenWidth,
+        height: screenH * 0.2,
         padding: const EdgeInsets.all(20.0),
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -101,7 +104,7 @@ class FirstPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildGetStartedButton(),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 30.0),
             _buildLoginRow(),
           ],
         ),
@@ -140,18 +143,28 @@ class FirstPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Expanded(
-          child: Text(
-            'Do you already have an account?',
-            style: TextStyle(color: Colors.black, fontSize: 16.0),
+        Expanded(
+            child: Text.rich(
+          TextSpan(
+            children: [
+              const TextSpan(
+                text: 'Do you already have an account? ',
+                style: TextStyle(color: Colors.black, fontSize: 16.0),
+              ),
+              TextSpan(
+                text: 'Login',
+                style: const TextStyle(
+                  color: Colors.blue, // Make it look like a link
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Get.toNamed('/Sign-In');
+                  },
+              ),
+            ],
           ),
-        ),
-        TextButton(
-          onPressed: () {
-            // Login button functionality
-          },
-          child: const Text('Login'),
-        ),
+        )),
       ],
     );
   }
