@@ -6,7 +6,7 @@ class LogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/hidden_gems_logo.png',
+      'assets/images/hidden_gems_logo.png',
       height: MediaQuery.of(context).size.height * 0.15,
       fit: BoxFit.contain,
     );

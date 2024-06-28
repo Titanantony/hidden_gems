@@ -17,7 +17,7 @@ class FirstPage extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/2f_page.jpg',
+              'assets/images/2f_page.jpg',
               fit: BoxFit.cover,
             ),
           ),
