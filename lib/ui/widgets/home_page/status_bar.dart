@@ -1,30 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class statusBar extends StatelessWidget {
-  const statusBar({
-    super.key,
-  });
+class StatusBarPage extends StatelessWidget {
+  const StatusBarPage({super.key});
+
+  Future<List<Map<String, String>>> fetchStatuses() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return [];
+    }
+
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('statuse')
+        .where('username',
+            isEqualTo: user.uid) // Assuming username is user's UID
+        .get();
+    List<Map<String, String>> statuses = [];
+
+    for (var doc in snapshot.docs) {
+      String username = doc['username'];
+      String imagePath = doc['imagePath'];
+      String imageUrl =
+          await FirebaseStorage.instance.ref(imagePath).getDownloadURL();
+
+      statuses.add({
+        'username': username,
+        'imageUrl': imageUrl,
+      });
+    }
+    return statuses;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const StatusBar([
-      {'username': '_a.nita.h', 'imagePath': 'assets/images/home_pic_1.jpeg'},
-      {'username': '_issrissa', 'imagePath': 'assets/images/home_pic_2.jpeg'},
-      {
-        'username': '___c.h.e.c.h.e___',
-        'imagePath': 'assets/images/home_pic_3.jpeg'
+    return FutureBuilder<List<Map<String, String>>>(
+      future: fetchStatuses(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No statuses found'));
+        } else {
+          return StatusBar(snapshot.data!);
+        }
       },
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_5.jpeg'},
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_6.jpeg'},
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_7.jpeg'},
-    ]);
+    );
   }
 }
 
 class StatusBar extends StatelessWidget {
   final List<Map<String, String>> statuses;
 
-  const StatusBar(this.statuses);
+  const StatusBar(this.statuses, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +67,13 @@ class StatusBar extends StatelessWidget {
         itemBuilder: (context, index) {
           final status = statuses[index];
           final username = status['username'] ?? 'Unknown';
-          final imagePath = status['imagePath'] ??
-              ''; // Provide a default empty string if null
+          final imageUrl = status['imageUrl'] ?? '';
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: StatusItem(
               username: username,
-              imagePath: imagePath,
+              imageUrl: imageUrl,
             ),
           );
         },
@@ -54,12 +84,12 @@ class StatusBar extends StatelessWidget {
 
 class StatusItem extends StatelessWidget {
   final String username;
-  final String imagePath;
+  final String imageUrl;
 
-  const StatusItem._(this.username, this.imagePath);
+  const StatusItem._(this.username, this.imageUrl);
 
-  factory StatusItem({required String username, required String imagePath}) {
-    return StatusItem._(username, imagePath);
+  factory StatusItem({required String username, required String imageUrl}) {
+    return StatusItem._(username, imageUrl);
   }
 
   @override
@@ -87,13 +117,13 @@ class StatusItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: ClipOval(
-                  child: imagePath.isNotEmpty
-                      ? Image.asset(
-                          imagePath,
+                  child: imageUrl.isNotEmpty
+                      ? Image.network(
+                          imageUrl,
                           fit: BoxFit.cover,
                         )
                       : const Icon(Icons.person,
-                          size: 50), // Placeholder if imagePath is empty
+                          size: 50), // Placeholder if imageUrl is empty
                 ),
               ),
             ),

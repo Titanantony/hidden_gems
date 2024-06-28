@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const statusBar(),
+            const StatusBarPage(),
             Expanded(
               child: ListView(
                 children: [
