@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hidden_gems/ui/utils/signin_google.dart';
-import 'package:hidden_gems/ui/wigets/email_text_field.dart';
-import 'package:hidden_gems/ui/wigets/forgot_password_text.dart';
-import 'package:hidden_gems/ui/wigets/login_button.dart';
-import 'package:hidden_gems/ui/wigets/signin_up_header.dart';
-import 'package:hidden_gems/ui/wigets/logo_widget.dart';
-import 'package:hidden_gems/ui/wigets/password_text_field.dart';
-import 'package:hidden_gems/ui/wigets/responsive_center_scrollable.dart';
-import 'package:hidden_gems/ui/wigets/sign_in_up_divider.dart';
-import 'package:hidden_gems/ui/wigets/sign_up_in_text.dart';
-import 'package:hidden_gems/ui/wigets/social_media_buttons.dart';
 import 'package:hidden_gems/ui/constants/colors.dart';
+import 'package:hidden_gems/ui/wigets/authentication/email_text_field.dart';
+import 'package:hidden_gems/ui/wigets/authentication/forgot_password_text.dart';
+import 'package:hidden_gems/ui/wigets/authentication/login_button.dart';
+import 'package:hidden_gems/ui/wigets/authentication/logo_widget.dart';
+import 'package:hidden_gems/ui/wigets/authentication/password_text_field.dart';
+import 'package:hidden_gems/ui/wigets/authentication/responsive_center_scrollable.dart';
+import 'package:hidden_gems/ui/wigets/authentication/sign_in_up_divider.dart';
+import 'package:hidden_gems/ui/wigets/authentication/sign_up_in_text.dart';
+import 'package:hidden_gems/ui/wigets/authentication/signin_up_header.dart';
+import 'package:hidden_gems/ui/wigets/authentication/social_media_buttons.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class LoginScreen extends StatefulWidget {
