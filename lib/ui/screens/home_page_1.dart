@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_gems/ui/wigets/home_page/status_bar.dart';
+import 'package:hidden_gems/ui/widgets/home_page/status_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

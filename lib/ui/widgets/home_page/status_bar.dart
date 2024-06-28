@@ -100,7 +100,7 @@ class StatusItem extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(username, style: const TextStyle(color: Colors.white)),
+        Text(username, style: const TextStyle(color: Colors.black)),
       ],
     );
   }
