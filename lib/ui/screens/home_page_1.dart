@@ -39,7 +39,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const StatusBarPage(),
+            const statusBar(),
+            // const UserInfoWidget(),
             Expanded(
               child: ListView(
                 children: [
