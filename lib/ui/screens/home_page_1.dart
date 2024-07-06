@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hidden_gems/ui/widgets/home_page/status_bar.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hidden Gems',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,23 +61,44 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const statusBar(),
-            // const UserInfoWidget(),
             Expanded(
-              child: ListView(
-                children: [
-                  _buildLocationCard(
-                    'Hokkaido Ramen Santouka',
-                    'Santouka',
-                    '800 meters',
-                    'assets/images/home_pic_7.jpeg',
-                  ),
-                  _buildLocationCard(
-                    'Another Place',
-                    'Description',
-                    '  400 meters \n From your location',
-                    'assets/images/home_pic_8.jpeg',
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('recreation_spots')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (!snapshot.hasData) {
+                    return Center(child: Text('No data available'));
+                  }
+
+                  final docs = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    itemCount: docs.length,
+                    itemBuilder: (context, index) {
+                      final data = docs[index].data() as Map<String, dynamic>;
+                      final title = data['title'] ?? 'No title';
+                      final subtitle = data['subtitle'] ?? 'No subtitle';
+                      final distance = data['distance'] ?? 'No distance';
+                      final imagePath =
+                          data['images'] ?? 'https://via.placeholder.com/200';
+
+                      // Logging the data to debug
+                      print(
+                          'Title: $title, Subtitle: $subtitle, Distance: $distance, Image: $imagePath');
+
+                      return _buildLocationCard(
+                        title,
+                        subtitle,
+                        distance,
+                        imagePath,
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],
@@ -99,11 +141,20 @@ class _HomePageState extends State<HomePage> {
         children: [
           Stack(
             children: [
-              Image.asset(
+              Image.network(
                 imagePath,
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  print('Failed to load image: $error'); // Log error
+                  return Image.asset(
+                    'assets/images/home_pic_8.jpeg', // Placeholder asset image
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
               Positioned(
                 top: 8,
