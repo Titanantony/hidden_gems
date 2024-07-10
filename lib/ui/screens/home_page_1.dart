@@ -3,25 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hidden_gems/ui/widgets/home_page/status_bar.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hidden Gems',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
-    );
-  }
-}
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -68,10 +49,10 @@ class _HomePageState extends State<HomePage> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (!snapshot.hasData) {
-                    return Center(child: Text('No data available'));
+                    return const Center(child: Text('No data available'));
                   }
 
                   final docs = snapshot.data!.docs;
@@ -149,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                 errorBuilder: (context, error, stackTrace) {
                   print('Failed to load image: $error'); // Log error
                   return Image.asset(
-                    'assets/images/home_pic_8.jpeg', // Placeholder asset image
+                    'assets/images/pic_8.jpeg', // Placeholder asset image
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
