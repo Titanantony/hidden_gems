@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hidden_gems/ui/screens/first_page.dart';
-import 'package:hidden_gems/ui/screens/home_page_1.dart';
+import 'package:hidden_gems/ui/screens/homepage/homePage.dart';
 import 'package:hidden_gems/ui/screens/sign_in_screen.dart';
 import 'package:hidden_gems/ui/screens/sign_up_screen.dart';
 

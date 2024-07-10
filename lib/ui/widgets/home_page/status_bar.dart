@@ -8,15 +8,15 @@ class statusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const StatusBar([
-      {'username': '_a.nita.h', 'imagePath': 'assets/images/home_pic_1.jpeg'},
-      {'username': '_issrissa', 'imagePath': 'assets/images/home_pic_2.jpeg'},
+      {'username': '_a.nita.h', 'imagePath': 'assets/images/pic_1.jpeg'},
+      {'username': '_issrissa', 'imagePath': 'assets/images/pic_2.jpeg'},
       {
         'username': '___c.h.e.c.h.e___',
-        'imagePath': 'assets/images/home_pic_3.jpeg'
+        'imagePath': 'assets/images/pic_3.jpeg'
       },
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_5.jpeg'},
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_6.jpeg'},
-      {'username': '_mal.emba', 'imagePath': 'assets/images/home_pic_7.jpeg'},
+      {'username': '_mal.emba', 'imagePath': 'assets/images/pic_5.jpeg'},
+      {'username': '_mal.emba', 'imagePath': 'assets/images/pic_6.jpeg'},
+      {'username': '_mal.emba', 'imagePath': 'assets/images/pic_7.jpeg'},
     ]);
   }
 }

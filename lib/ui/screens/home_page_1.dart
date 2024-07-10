@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:hidden_gems/ui/widgets/home_page/status_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,8 +63,10 @@ class _HomePageState extends State<HomePage> {
                       final title = data['title'] ?? 'No title';
                       final subtitle = data['subtitle'] ?? 'No subtitle';
                       final distance = data['distance'] ?? 'No distance';
-                      final imagePath =
-                          data['images'] ?? 'https://via.placeholder.com/200';
+                      final images = data['imagePath'] as List<dynamic>? ?? [];
+                      final imagePath = images.isNotEmpty
+                          ? images[0] as String
+                          : 'https://placehold.co/200/orange/white.jpeg';
 
                       // Logging the data to debug
                       print(
