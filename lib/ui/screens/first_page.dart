@@ -51,7 +51,7 @@ class FirstPage extends StatelessWidget {
       alignment: Alignment.topRight,
       child: ElevatedButton(
         onPressed: () {
-          // Skip button functionality
+          Get.toNamed('/Home-Page');
         },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -115,7 +115,7 @@ class FirstPage extends StatelessWidget {
   ElevatedButton _buildGetStartedButton() {
     return ElevatedButton(
       onPressed: () {
-        // Let's Get Started button functionality
+        Get.toNamed('/Sign-In');
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
