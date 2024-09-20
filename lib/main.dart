@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Calibri', // Sans-serif font
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/Home-Page', // Set the initial route
+      initialRoute: '/First-Page', // Set the initial route
       getPages: Routes.routes, // Pass the routes from your routes file
     );
   }
